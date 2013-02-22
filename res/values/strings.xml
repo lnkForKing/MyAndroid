@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyAndroid</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="filename">文件名</string>
+    <string name="context">文件内容</string>
+    <string name="save">保存</string>
+    <string name="append">追加内容</string>
+    <string name="readContext">读取内容</string>
+    <string name="inputFileName">请输入文件名</string>
+    <string name="inputContext">请输入文件内容</string>
+    <string name="readError">读取内容失败或文件不存在</string>
+    <string name="saveSuccess">保存成功</string>
+    <string name="saveError">保存失败</string>
+</resources>

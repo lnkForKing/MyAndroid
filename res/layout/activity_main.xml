@@ -60,8 +60,14 @@
 			    android:layout_height="wrap_content"
 			    android:text="@string/readContext" />
 		</LinearLayout>
+		<Button 
+		    android:id="@+id/readXML"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/readSdXML" />
 		<TextView android:id="@+id/showContextView"
 		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content" />
+		    android:layout_height="wrap_content"
+		    android:textIsSelectable="true" />
     </LinearLayout>
 </LinearLayout>

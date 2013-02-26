@@ -14,4 +14,12 @@
     <string name="inputContext">请输入文件内容</string>
     <string name="readError">读取内容失败或文件不存在</string>
     <string name="readSdXML">读取SD卡的XML文件</string>
+    <string name="back">返回</string>
+    <!-- pref_activity -->
+    <string name="name">姓名</string>
+    <string name="age">年龄</string>
+    <string name="inputName">姓名不能为空</string>
+    <string name="inputAge">年龄必须为大于0的整数</string>
+    <string name="toPref">使用SharedPreferences进行数据存储</string>
+    
 </resources>

@@ -2,17 +2,16 @@ package cn.king.myandroid;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -42,6 +41,7 @@ public class MainActivity extends Activity {
 		Button appendBtn = getViewById(R.id.append);
 		Button showContextBtn = getViewById(R.id.showContext);
 		Button readXMLBtn = getViewById(R.id.readXML);
+		Button toPrefBtn = getViewById(R.id.toPref);
 		saveBtn.setOnClickListener(saveFileListener); //保存文件内容
 		appendBtn.setOnClickListener(saveFileListener); //追加文件内容
 		//显示文件内容
@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				//判断内存是否读写
 				if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-					Toast.makeText(MainActivity.this, "读不取内存卡或无权限", Toast.LENGTH_LONG);
+					Toast.makeText(MainActivity.this, "读不取内存卡或无权限", Toast.LENGTH_LONG).show();
 					return;
 				}
 				try {
@@ -88,6 +88,13 @@ public class MainActivity extends Activity {
 					Log.i(TAG, e.toString());
 					Toast.makeText(MainActivity.this, R.string.readError, Toast.LENGTH_LONG).show();
 				}
+			}
+		});
+		toPrefBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, PrefActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
@@ -124,6 +131,23 @@ public class MainActivity extends Activity {
 			Toast.makeText(MainActivity.this, rid, Toast.LENGTH_LONG).show();
 		}
 	};
+	
+	public void setPref(){
+		SharedPreferences pref = this.getSharedPreferences("myPref", MODE_PRIVATE);
+		Editor editor = pref.edit();
+		editor.putString("name", "liming");
+		editor.putInt("age", 20);
+		editor.commit();
+	}
+	
+	public void getPref() throws NameNotFoundException{
+		//读取其它应用的配置文件
+//		Context otherApp = this.createPackageContext("cn.king.myandroid", Context.CONTEXT_IGNORE_SECURITY);
+//		SharedPreferences pref = otherApp.getSharedPreferences("myPref", Context.MODE_WORLD_WRITEABLE);
+		SharedPreferences pref = this.getSharedPreferences("myPref", MODE_PRIVATE);
+		pref.getString("name", null);
+		pref.getInt("age", 1);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

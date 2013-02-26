@@ -64,7 +64,13 @@
 		    android:id="@+id/readXML"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
+		    android:textIsSelectable="true"
 		    android:text="@string/readSdXML" />
+		<Button 
+		    android:id="@+id/toPref"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/toPref" />
 		<TextView android:id="@+id/showContextView"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"

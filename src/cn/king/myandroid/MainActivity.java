@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 		Button showContextBtn = getViewById(R.id.showContext);
 		Button readXMLBtn = getViewById(R.id.readXML);
 		Button toPrefBtn = getViewById(R.id.toPref);
+		Button openActivity = getViewById(R.id.openActivity);
 		saveBtn.setOnClickListener(saveFileListener); //保存文件内容
 		appendBtn.setOnClickListener(saveFileListener); //追加文件内容
 		//显示文件内容
@@ -94,6 +95,13 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, PrefActivity.class);
+				startActivity(intent);
+			}
+		});
+		openActivity.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, OpenActivity.class);
 				startActivity(intent);
 			}
 		});

@@ -66,14 +66,19 @@
 		    android:layout_height="wrap_content"
 		    android:textIsSelectable="true"
 		    android:text="@string/readSdXML" />
+		<TextView android:id="@+id/showContextView"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:textIsSelectable="true" />
 		<Button 
 		    android:id="@+id/toPref"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="@string/toPref" />
-		<TextView android:id="@+id/showContextView"
-		    android:layout_width="fill_parent"
+		<Button 
+		    android:id="@+id/openActivity"
+		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:textIsSelectable="true" />
+		    android:text="@string/openActivity" />
     </LinearLayout>
 </LinearLayout>

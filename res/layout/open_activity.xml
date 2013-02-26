@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <TextView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/openActivityContext1" />
+        <EditText
+            android:id="@+id/context" 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+        <Button 
+            android:id="@+id/openActivity1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sendActivityContext"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <TextView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/openActivityContext2" />
+        <Button 
+            android:id="@+id/openActivity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/openActivityContext"/>
+        <TextView 
+            android:id="@+id/receiver"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textIsSelectable="true"/>
+    </LinearLayout>
+
+</LinearLayout>

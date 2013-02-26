@@ -15,6 +15,7 @@
     <string name="readError">读取内容失败或文件不存在</string>
     <string name="readSdXML">读取SD卡的XML文件</string>
     <string name="back">返回</string>
+    
     <!-- pref_activity -->
     <string name="name">姓名</string>
     <string name="age">年龄</string>
@@ -22,4 +23,11 @@
     <string name="inputAge">年龄必须为大于0的整数</string>
     <string name="toPref">使用SharedPreferences进行数据存储</string>
     
+    <!-- open_activity -->
+    <string name="openTile">打开新窗口</string>
+    <string name="openActivityContext1">打开一个新窗口并把文本框内容传过去</string>
+    <string name="openActivityContext2">打开一个新窗口并把新窗口的文本框内容传回来</string>
+    <string name="sendActivityContext">将内容传到新的窗口打开</string>
+    <string name="openActivityContext">打开新的窗口输入值</string>
+    <string name="openActivity">打开新窗口</string>
 </resources>

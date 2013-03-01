@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -42,7 +43,8 @@ public class MainActivity extends Activity {
 		Button showContextBtn = getViewById(R.id.showContext);
 		Button readXMLBtn = getViewById(R.id.readXML);
 		Button toPrefBtn = getViewById(R.id.toPref);
-		Button openActivity = getViewById(R.id.openActivity);
+		Button openActivityBtn = getViewById(R.id.openActivity);
+		Button openListViewBtn = getViewById(R.id.openListView);
 		saveBtn.setOnClickListener(saveFileListener); //保存文件内容
 		appendBtn.setOnClickListener(saveFileListener); //追加文件内容
 		//显示文件内容
@@ -91,20 +93,22 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-		toPrefBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, PrefActivity.class);
+		toPrefBtn.setOnClickListener(openActivity(PrefActivity.class));
+		openActivityBtn.setOnClickListener(openActivity(OpenActivity.class));
+		openListViewBtn.setOnClickListener(openActivity(ListViewActivity.class));
+	}
+	/**
+	 * 跳转Activity
+	 * @param clazz
+	 * @return
+	 */
+	private View.OnClickListener openActivity(final Class<?> clazz){
+		return new View.OnClickListener() {
+			@Override public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, clazz);
 				startActivity(intent);
 			}
-		});
-		openActivity.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, OpenActivity.class);
-				startActivity(intent);
-			}
-		});
+		};
 	}
 	
 	/**

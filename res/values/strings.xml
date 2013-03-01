@@ -30,4 +30,8 @@
     <string name="sendActivityContext">将内容传到新的窗口打开</string>
     <string name="openActivityContext">打开新的窗口输入值</string>
     <string name="openActivity">打开新窗口</string>
+    
+    <!-- listview_activity -->
+    <string name="pid">序号</string>
+    <string name="openListView">打开ListView</string>
 </resources>

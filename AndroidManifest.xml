@@ -16,6 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <uses-library android:name="android.test.runner"/>
+        <provider android:name="cn.king.provider.PersonContentProvider" android:authorities="cn.king.provider.person"></provider>
         <activity
             android:name="cn.king.myandroid.MainActivity"
             android:label="@string/app_name" >

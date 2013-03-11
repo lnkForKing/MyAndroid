@@ -34,4 +34,13 @@
     <!-- listview_activity -->
     <string name="pid">序号</string>
     <string name="openListView">打开ListView</string>
+    
+    <!-- contact_activity -->
+    <string name="getContact">获取系统联系人</string>
+    <string name="tel">电话</string>
+    
+    <string name="openOtherApp">打开MutualAndroid并转MyAndroid过去</string>
+    <string name="openOtherApp2">打开MutualAndroid的OtherActivity并转MyAndroid过去</string>
+    <string name="liaojie">了解Activity的生命周期</string>
+    <string name="alert">打开模式窗口</string>
 </resources>

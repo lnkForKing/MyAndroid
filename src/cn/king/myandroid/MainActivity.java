@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -45,6 +46,10 @@ public class MainActivity extends Activity {
 		Button toPrefBtn = getViewById(R.id.toPref);
 		Button openActivityBtn = getViewById(R.id.openActivity);
 		Button openListViewBtn = getViewById(R.id.openListView);
+		Button getContactBtn = getViewById(R.id.getContact);
+		Button openOtherAppBtn = getViewById(R.id.openOtherApp);
+		Button openOtherApp2Btn = getViewById(R.id.openOtherApp2);
+		Button liaojieBtn = getViewById(R.id.liaojie);
 		saveBtn.setOnClickListener(saveFileListener); //保存文件内容
 		appendBtn.setOnClickListener(saveFileListener); //追加文件内容
 		//显示文件内容
@@ -93,9 +98,29 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+		openOtherAppBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent("cn.king.mutualandroid");
+				intent.putExtra("other", true);
+				intent.putExtra("hello", "MyAndroid");
+				startActivity(intent);
+			}
+		});
+		openOtherApp2Btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent("cn.king.mutualandroid",Uri.parse("other:*"));
+				intent.putExtra("other", true);
+				intent.putExtra("hello", "MyAndroid");
+				startActivity(intent);
+			}
+		});
 		toPrefBtn.setOnClickListener(openActivity(PrefActivity.class));
 		openActivityBtn.setOnClickListener(openActivity(OpenActivity.class));
 		openListViewBtn.setOnClickListener(openActivity(ListViewActivity.class));
+		getContactBtn.setOnClickListener(openActivity(ContactActivity.class));
+		liaojieBtn.setOnClickListener(openActivity(ShengmingActivity.class));
 	}
 	/**
 	 * 跳转Activity

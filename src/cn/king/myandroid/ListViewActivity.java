@@ -39,7 +39,7 @@ public class ListViewActivity extends Activity {
 			map.put("age", person.getAge());
 			data.add(map);
 		}
-		SimpleAdapter adapter = new SimpleAdapter(ListViewActivity.this, data, R.layout.personlsit, 
+		SimpleAdapter adapter = new SimpleAdapter(ListViewActivity.this, data, R.layout.personlist, 
 				new String[]{"pid", "name", "age"}, 
 				new int[]{R.id.pid, R.id.name, R.id.age});
 		ListView listView = getViewById(R.id.listView);

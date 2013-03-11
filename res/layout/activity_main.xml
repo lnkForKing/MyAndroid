@@ -85,5 +85,25 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="@string/openListView" />
+		<Button 
+		    android:id="@+id/getContact"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/getContact" />
+		<Button 
+		    android:id="@+id/openOtherApp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/openOtherApp" />
+		<Button 
+		    android:id="@+id/openOtherApp2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/openOtherApp2" />
+		<Button 
+		    android:id="@+id/liaojie"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/liaojie" />
     </LinearLayout>
 </LinearLayout>

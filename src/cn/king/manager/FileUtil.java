@@ -1,9 +1,13 @@
 package cn.king.manager;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +20,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import cn.king.jdo.Person;
 
 public class FileUtil {
@@ -120,4 +123,104 @@ public class FileUtil {
 			super.endDocument();
 		}
 	}
+	
+	public static void downloadFile(String fileUrl, String savePath) throws IOException{
+		new FileUtil().downloadFileByUrl(fileUrl, savePath);
+	}
+	
+	public static void main(String[] s) throws IOException{
+		String url = "http://www.musicfzl.net/data/attachment/forum//201302/05/134527e87s0q8sjv37o1qv.mp3";
+		String path ="D://xx.mp3";
+		FileUtil.downloadFile(url, path);
+	}
+	
+	private void downloadFileByUrl(String fileUrl, String savePath) throws IOException{
+		URL url = new URL(fileUrl);
+	  	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	  	conn.setRequestMethod("GET");
+	  	int fileSize = conn.getContentLength(); //获取文件大小
+	  	conn.disconnect();  //关闭连接
+	  	
+	  	int threadSize = 3;  //线程数
+	  	int avgSize = fileSize / 3 + 1;  //平均每个线程下载的大小
+	  	
+	  	File file = new File(savePath);
+	  	RandomAccessFile randomFile = new RandomAccessFile(file, "rw"); //初始化一个空白文件，r:读，rw读写
+	  	randomFile.setLength(fileSize);  //初始化文件大小
+		randomFile.close();
+		
+		DownloadMonitor monitor = new DownloadMonitor(fileSize);
+		for (int i = 0; i < threadSize; i++) {
+			long offset = i * avgSize;  //线程开始下载的位置
+			RandomAccessFile aveFile = new RandomAccessFile(file, "rw");
+			aveFile.seek(i * avgSize);  //指定写入的位置
+			new DownloadThread(i, url, offset, avgSize, aveFile).setMonitor(monitor).start();
+		}
+	}
+	
+	private class DownloadThread extends Thread{
+		private int order;
+		private URL url;
+		private long offset;
+		private long downloadSize;
+		private RandomAccessFile randomFile;
+		private DownloadMonitor monitor;
+
+		public DownloadThread setMonitor(DownloadMonitor monitor) {
+			this.monitor = monitor;
+			return this;
+		}
+
+		public DownloadThread(int order, URL url, long offset, long downloadSize, RandomAccessFile randomFile) {
+			super();
+			this.order = order;
+			this.url = url;
+			this.offset = offset;
+			this.randomFile = randomFile;
+		}
+
+		@Override
+		public void run() {
+			try {
+				HttpURLConnection conn = (HttpURLConnection) this.url.openConnection();
+			  	conn.setRequestMethod("GET");
+			  	conn.setRequestProperty("Range", "bytes="+offset+"-");
+			  	InputStream inStream = conn.getInputStream();
+			  	byte[] buffer = new byte[1024];
+			  	int len = -1;
+			  	while((len = inStream.read(buffer)) != -1 && len < downloadSize){
+			  		randomFile.write(buffer, 0, len);
+			  		if(monitor != null) monitor.monitor(len);
+			  	}
+			  	inStream.close();
+			  	randomFile.close();
+			  	System.out.println("线程"+(order + 1)+"下载完成");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+	
+	private class DownloadMonitor{
+		private int size;
+		private int loadSize = 0;
+		public DownloadMonitor(int size){
+			this.size = size;
+		}
+		public void monitor(int size){
+			loadSize += size;
+			String.format("下载进度：%s%  %s/%s", (loadSize * 100) / this.size, loadSize, this.size);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

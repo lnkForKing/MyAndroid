@@ -123,13 +123,13 @@ public class FileUtil {
 			super.endDocument();
 		}
 	}
-	
+
 	public static void downloadFile(String fileUrl, String savePath) throws IOException{
 		new FileUtil().downloadFileByUrl(fileUrl, savePath);
 	}
 	
 	public static void main(String[] s) throws IOException{
-		String url = "http://www.musicfzl.net/data/attachment/forum//201302/05/134527e87s0q8sjv37o1qv.mp3";
+		String url = "http://bsf.e43g.com:91/123.mp3";
 		String path ="D://xx.mp3";
 		FileUtil.downloadFile(url, path);
 	}
@@ -149,7 +149,7 @@ public class FileUtil {
 	  	randomFile.setLength(fileSize);  //初始化文件大小
 		randomFile.close();
 		
-		DownloadMonitor monitor = new DownloadMonitor(fileSize);
+		final DownloadMonitor monitor = new DownloadMonitor(fileSize);
 		for (int i = 0; i < threadSize; i++) {
 			long offset = i * avgSize;  //线程开始下载的位置
 			RandomAccessFile aveFile = new RandomAccessFile(file, "rw");
@@ -176,6 +176,7 @@ public class FileUtil {
 			this.order = order;
 			this.url = url;
 			this.offset = offset;
+			this.downloadSize = downloadSize;
 			this.randomFile = randomFile;
 		}
 
@@ -184,7 +185,8 @@ public class FileUtil {
 			try {
 				HttpURLConnection conn = (HttpURLConnection) this.url.openConnection();
 			  	conn.setRequestMethod("GET");
-			  	conn.setRequestProperty("Range", "bytes="+offset+"-");
+			  	conn.setConnectTimeout(6*1000);
+			  	conn.setRequestProperty("Range", "bytes="+offset+"-"+(offset + downloadSize));
 			  	InputStream inStream = conn.getInputStream();
 			  	byte[] buffer = new byte[1024];
 			  	int len = -1;
@@ -211,16 +213,8 @@ public class FileUtil {
 			this.size = size;
 		}
 		public void monitor(int size){
-			loadSize += size;
-			String.format("下载进度：%s%  %s/%s", (loadSize * 100) / this.size, loadSize, this.size);
+			this.loadSize += size;
+			System.out.println("下载进度："+((loadSize * 100) / this.size)+"%  "+this.loadSize+"/" + this.size);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }
